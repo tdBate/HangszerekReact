@@ -8,18 +8,32 @@ function App() {
 
   const [data, setData] = useState(hangszerek)
 
+  const [hiba, setHiba] = useState("");
+
   function addItem(nev: string, ar: number) {
     setData([...data, { nev, ar }]);
   }
 
-  function handleSubmit(e: FormDataEvent) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     const nev = formData.get("nev");
-    const ar = formData.get("ar");
+    const ar: number = Number(formData.get("ar"));
+
+    if (!nev || !ar) {
+      setHiba("Mindkét mezőt ki kell tölteni");
+      return;
+    }
+
+    if (ar < 0) {
+      setHiba("Nem valid szám");
+      return;
+    }
+
     addItem(nev, ar);
     form.reset();
+    setHiba("");
   }
 
 
@@ -46,6 +60,10 @@ function App() {
 
         <button type="submit">Elküld</button>
       </form>
+
+      <div id="hibaBlokk">
+        {hiba}
+      </div>
     </>
   )
 }
