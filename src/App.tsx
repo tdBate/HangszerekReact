@@ -43,26 +43,35 @@ function App() {
 
   return (
     <>
-      <h1>Hangszerek</h1>
-      <input
-        type="text"
-        value={kereses}
-        onChange={(e) => setKereses(e.target.value)}
-      />
-      <HangszerTabla data={szurtHangszerek}></HangszerTabla>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <h1 className="text-center">Hangszerek</h1>
 
-      <button onClick={(e) => setSorrend("novekvo")}>Növ</button>
-      <button onClick={(e) => setSorrend("csokkeno")}>Csök</button>
+            <label className="form-label" htmlFor="filterName">Filter: </label><input
+              className="form-control"
+              name="filterName"
+              type="text"
+              value={kereses}
+              onChange={(e) => setKereses(e.target.value)}
+            />
+            <HangszerTabla data={szurtHangszerek}></HangszerTabla>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nev">Név: </label><input name="nev" id="nev" type="text" /><br />
-        <label htmlFor="ar">Ár: </label><input name="ar" id="ar" type="number" />
+            <button className="btn btn-primary" onClick={(e) => setSorrend("novekvo")}>Növ</button>
+            <button className="btn btn-primary" onClick={(e) => setSorrend("csokkeno")}>Csök</button>
 
-        <button type="submit">Elküld</button>
-      </form>
+            <form onSubmit={handleSubmit}>
+              <label className="form-label" htmlFor="nev">Név: </label><input className="form-control" name="nev" id="nev" type="text" /><br />
+              <label className="form-label" htmlFor="ar">Ár: </label><input className="form-control" name="ar" id="ar" type="number" />
 
-      <div id="hibaBlokk">
-        {hiba}
+              <button className="btn btn-primary" type="submit">Elküld</button>
+            </form>
+
+            <div className="text-danger" id="hibaBlokk">
+              {hiba}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
